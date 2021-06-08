@@ -297,55 +297,55 @@ rfit_sig_log_h_0 = np.sqrt(rfit_err[n_ch - n_ch_p + 3] ** 2 / 25.0 + \
 rfit_sig_h_0 = rfit_h_0 * np.log(10.0) * rfit_sig_log_h_0
 
 # report results, H_0 fit and its uncertainty
-print 'Riess iterative fitting: '
-print ' {:} rejected, chi^2/dof = {:5.3f}'.format(n_rej, rfit_chisq)
+print('Riess iterative fitting: ')
+print(' {:} rejected, chi^2/dof = {:5.3f}'.format(n_rej, rfit_chisq))
 if sim:
     for i in range(0, n_ch_d):
-        print ' mu_{0:d}: {1:7.5f} +/- {2:7.5f} ({3:7.5f})'.format(i + 1, \
+        print(' mu_{0:d}: {1:7.5f} +/- {2:7.5f} ({3:7.5f})'.format(i + 1, \
             rfit[n_ch - n_ch_g + 3 + i] + sim_info['true_mu_ch'][i], \
             rfit_err[n_ch - n_ch_g + 3 + i], \
-            sim_info['true_mu_ch'][i])
+            sim_info['true_mu_ch'][i]))
     for i in range(0, n_ch_p):
-        print ' mu_{0:d}: not estimated by Riess et al.'.format(i + n_ch_d + 1)
+        print(' mu_{0:d}: not estimated by Riess et al.'.format(i + n_ch_d + 1))
     for i in range(0, n_ch - n_ch_g):
-        print ' mu_{0:d}: {1:7.5f} +/- {2:7.5f} ({3:7.5f})'.format(i + n_ch_g + 1, \
-            rfit[i], rfit_err[i], sim_info['true_mu_ch'][i + n_ch_g])
-    print ' intcpt: {0:7.4f} +/- {1:7.5f} ({2:7.4f})'.format(rfit[n_ch_c + n_ch_s], \
-        rfit_err[n_ch_c + n_ch_s], sim_info['abs_mag_c_std'])
-    print ' slope_p: {0:8.5f} +/- {1:7.5f} ({2:8.5f})'.format(rfit[n_ch_c + n_ch_s + 1], \
-        rfit_err[n_ch_c + n_ch_s + 1], sim_info['slope_p'])
+        print(' mu_{0:d}: {1:7.5f} +/- {2:7.5f} ({3:7.5f}'.format(i + n_ch_g + 1, \
+            rfit[i], rfit_err[i], sim_info['true_mu_ch'][i + n_ch_g]))
+    print(' intcpt: {0:7.4f} +/- {1:7.5f} ({2:7.4f})'.format(rfit[n_ch_c + n_ch_s], \
+        rfit_err[n_ch_c + n_ch_s], sim_info['abs_mag_c_std']))
+    print(' slope_p: {0:8.5f} +/- {1:7.5f} ({2:8.5f})'.format(rfit[n_ch_c + n_ch_s + 1], \
+        rfit_err[n_ch_c + n_ch_s + 1], sim_info['slope_p']))
     if inc_met_dep:
-        print ' slope_z: {0:8.5f} +/- {1:7.5f} ({2:8.5f})'.format(rfit[-1], \
-            rfit_err[-1], sim_info['slope_z'])
-    print ' m_0^SN: {0:7.4f} +/- {1:7.5f} ({2:7.4f})'.format(rfit[n_ch - n_ch_p + 3], \
-        rfit_err[n_ch - n_ch_p + 3], sim_info['abs_mag_s_std'])
-    print ' zp_off: {0:7.4f} +/- {1:7.5f} ({2:7.4f})'.format(rfit[n_ch - n_ch_g + 2], \
-        rfit_err[n_ch - n_ch_g + 2], sim_info['zp_off'])
-    print ' H_0: {0:8.5f} +/- {1:7.5f} ({2:8.5f})'.format(rfit_h_0, \
-        rfit_sig_h_0, sim_info['h_0'])
+        print(' slope_z: {0:8.5f} +/- {1:7.5f} ({2:8.5f})'.format(rfit[-1], \
+            rfit_err[-1], sim_info['slope_z']))
+    print(' m_0^SN: {0:7.4f} +/- {1:7.5f} ({2:7.4f})'.format(rfit[n_ch - n_ch_p + 3], \
+        rfit_err[n_ch - n_ch_p + 3], sim_info['abs_mag_s_std']))
+    print(' zp_off: {0:7.4f} +/- {1:7.5f} ({2:7.4f})'.format(rfit[n_ch - n_ch_g + 2], \
+        rfit_err[n_ch - n_ch_g + 2], sim_info['zp_off']))
+    print(' H_0: {0:8.5f} +/- {1:7.5f} ({2:8.5f})'.format(rfit_h_0, \
+        rfit_sig_h_0, sim_info['h_0']))
 else:
     for i in range(0, n_ch_d):
-        print ' mu_{0:d}: {1:7.5f} +/- {2:7.5f}'.format(i + 1, \
+        print(' mu_{0:d}: {1:7.5f} +/- {2:7.5f}'.format(i + 1, \
             rfit[n_ch - n_ch_g + 3 + i] + mu_anc[i], \
-            rfit_err[n_ch - n_ch_g + 3 + i])
+            rfit_err[n_ch - n_ch_g + 3 + i]))
     for i in range(0, n_ch_p):
-        print ' mu_{0:d}: not estimated by Riess et al.'.format(i + n_ch_d + 1)
+        print(' mu_{0:d}: not estimated by Riess et al.'.format(i + n_ch_d + 1))
     for i in range(0, n_ch - n_ch_g):
-        print ' mu_{0:d}: {1:7.5f} +/- {2:7.5f}'.format(i + n_ch_g + 1, \
-            rfit[i], rfit_err[i])
-    print ' intcpt: {0:7.4f} +/- {1:7.5f}'.format(rfit[n_ch_c + n_ch_s], \
-        rfit_err[n_ch_c + n_ch_s])
-    print ' slope_p: {0:8.5f} +/- {1:7.5f}'.format(rfit[n_ch_c + n_ch_s + 1], \
+        print(' mu_{0:d}: {1:7.5f} +/- {2:7.5f}'.format(i + n_ch_g + 1, \
+            rfit[i], rfit_err[i]))
+    print(' intcpt: {0:7.4f} +/- {1:7.5f}'.format(rfit[n_ch_c + n_ch_s], \
+        rfit_err[n_ch_c + n_ch_s]))
+    print(' slope_p: {0:8.5f} +/- {1:7.5f}').format(rfit[n_ch_c + n_ch_s + 1], \
         rfit_err[n_ch_c + n_ch_s + 1])
     if inc_met_dep:
-        print ' slope_z: {0:8.5f} +/- {1:7.5f}'.format(rfit[-1], \
-            rfit_err[-1])
-    print ' m_0^SN: {0:7.4f} +/- {1:7.5f}'.format(rfit[n_ch - n_ch_p + 3], \
-        rfit_err[n_ch - n_ch_p + 3])
-    print ' zp_off: {0:7.4f} +/- {1:7.5f}'.format(rfit[n_ch - n_ch_g + 2], \
-        rfit_err[n_ch - n_ch_g + 2])
-    print ' H_0: {0:8.5f} +/- {1:7.5f}'.format(rfit_h_0, \
-          rfit_sig_h_0)
+        print(' slope_z: {0:8.5f} +/- {1:7.5f}'.format(rfit[-1], \
+            rfit_err[-1]))
+    print(' m_0^SN: {0:7.4f} +/- {1:7.5f}'.format(rfit[n_ch - n_ch_p + 3], \
+        rfit_err[n_ch - n_ch_p + 3]))
+    print(' zp_off: {0:7.4f} +/- {1:7.5f}'.format(rfit[n_ch - n_ch_g + 2], \
+        rfit_err[n_ch - n_ch_g + 2]))
+    print(' H_0: {0:8.5f} +/- {1:7.5f}'.format(rfit_h_0, \
+          rfit_sig_h_0))
 
 # save results (trimmed parameter covariance matrix) to file.
 # order is: M^c, s^p, [s^Z,] M^s. append independent a_x constraint
@@ -422,8 +422,8 @@ else:
         with open(base + '_model.pkl', 'rb') as f:
             stan_model = pickle.load(f)
     except EnvironmentError:
-        print 'ERROR: pickled Stan model (' + base + '_model.pkl) not found. ' + \
-              'Please set recompile = True'
+        print('ERROR: pickled Stan model (' + base + '_model.pkl) not found. ' + \
+              'Please set recompile = True')
         exit()
 
 # set up Stan data
@@ -603,22 +603,22 @@ else:
         np.savetxt(base + '_minimal_chain_{:d}.csv'.format(i), \
                    samples[:, i, idx], delimiter = ',', \
                    header = hdr_str, comments = '')
-print fit
+print(fit)
 
 # plot some of the fits and report percentiles
 samples = fit.extract(permuted = True)
-print '{:6.3f}'.format(np.percentile(samples['h_0'], 50.0 - 68.27 / 2.0)) + \
+print('{:6.3f}'.format(np.percentile(samples['h_0'], 50.0 - 68.27 / 2.0)) + \
       ' < H_0 < ' + \
       '{:6.3f}'.format(np.percentile(samples['h_0'], 50.0 + 68.27 / 2.0)) + \
-      ' (68.3%)'
-print '{:6.3f}'.format(np.percentile(samples['h_0'], 50.0 - 95.45 / 2.0)) + \
+      ' (68.3%)')
+print('{:6.3f}'.format(np.percentile(samples['h_0'], 50.0 - 95.45 / 2.0)) + \
       ' < H_0 < ' + \
       '{:6.3f}'.format(np.percentile(samples['h_0'], 50.0 + 95.45 / 2.0)) + \
-      ' (95.5%)'
-print '{:6.3f}'.format(np.percentile(samples['h_0'], 50.0 - 99.73 / 2.0)) + \
+      ' (95.5%)')
+print('{:6.3f}'.format(np.percentile(samples['h_0'], 50.0 - 99.73 / 2.0)) + \
       ' < H_0 < ' + \
       '{:6.3f}'.format(np.percentile(samples['h_0'], 50.0 + 99.73 / 2.0)) + \
-      ' (99.7%)'
+      ' (99.7%)')
 if model_outliers:
     mp.rcParams["figure.figsize"] = [24, 5]
     fig, (ax_h_0, ax_intcpt, ax_sig) = mp.subplots(1, 3)
