@@ -40,8 +40,8 @@ intcola = intcolaMW #Extragalactic Cepheid intrinsic colour V_0-I-0= intcola + i
 intcolb = intcolbMW
 
 #plerror = 0.0267 #Scatter in P-L relation. Should be set to give chi2/dof=1 iteratively.
-plerror =  0.057 #Scatter in P-L relation. Should be set to give chi2/dof=1 iteratively.
-#plerror = 0.
+#plerror =  0.057 #Scatter in P-L relation. Should be set to give chi2/dof=1 iteratively.
+plerror = 0.065#27
 
 
 mu4258 = 29.397  	#Reid+2019
@@ -81,9 +81,9 @@ rescorrLMC = 0.0074 #Correction between resolved and not resolved Cepheids
 #case 1 is always only maser distance ##------------##------------##--
 ##------------##------------##------------##------------##------------
 
-skipMW = False
-skipN4258dis = False
-skipN4258 = False
+skipMW = True
+skipN4258dis = True
+skipN4258 = True
 skipM31  = True
 skipM31dis = True
 skipLMC = False
@@ -147,14 +147,14 @@ VILMC = lmc['F555Wmag']-lmc['F814Wmag']
 OH = np.concatenate([np.array(mw['[Fe/H]'] * (1 + koh)), np.zeros(nLMC) + FeHLMC * (1+koh), np.array(tab4['[O/H]']) - ZMW])
 
 #instead of Edvard's code where the data are as mag, implement the wesenheit correction here
-HMW = mw['F160W'] - R * VIMW  #+ crnl/2.5*(F160W0-mw['F160W']) 
-H = tab4['F160W'] - R * VI
-HLMC = lmc['F160Wmag'] - R * VILMC # + crnl/2.5*(F160W0-lmc['F160Wmag'])- lmc['Geo'] - rescorrLMC 
+HMW = mw['F160W'] - R * VIMW + crnl/2.5*(F160W0-mw['F160W']) 
+H = tab4['F160W'] - R * VI + crnl/2.5*(F160W0 - tab4['F160W']) 
+HLMC =   lmc['mWH']#lmc['F160Wmag'] - R * VILMC - lmc['Geo']  + crnl/2.5*(F160W0-lmc['F160Wmag']) - rescorrLMC#  #lmc['F160Wmag'] - R * VILMC #lmc['mWH']
 
 #these are the uncertainties to fix to a high value for removing the anchors
 sigHMW2 = (mw['sigma160W']*(1.-crnl/2.5)) ** 2 + (sigcrnl*(F160W0-mw['F160W'])) ** 2
-sigH2 = tab4['{sigma}tot'] ** 2
-sigHLMC2 = (lmc['e_mWH']*(1.-crnl/2.5)) ** 2. + (sigcrnl*(F160W0-lmc['mWH'])) ** 2.
+sigH2 = tab4['{sigma}tot'] ** 2 
+sigHLMC2 = lmc['e_mWH']**2. #(lmc['e_mWH']*(1.-crnl/2.5)) ** 2. + (sigcrnl*(F160W0-lmc['mWH'])) ** 2.
 	
 if skipMW: 
     sigHMW2  += 1.e12
@@ -180,7 +180,7 @@ Y = np.concatenate([np.array(mwpar), np.array(H),  np.array(HLMC), np.array([mu4
 #	H,HLMC,mu4258,muM31,muLMC,mb,rhpriorvec], axis=1)
 sigpiEDR3 = mw['sigma_piEDR3']
 insigmw = np.array(1./(sigHMW2+(5./np.log(10.)*sigpiEDR3/mw['pi_EDR3']) ** 2+ plerror ** 2))
-insigH = np.array(1./(sigH2+plerror ** 2))
+insigH = np.array(1./(sigH2))
 insigLMC  = np.array(1./(sigHLMC2+plerror ** 2))
 insigN4258 = np.array([1./sigmu4258 ** 2])
 insigM31 = np.array([1./sigmuM31 ** 2.])
